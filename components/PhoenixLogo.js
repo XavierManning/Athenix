@@ -15,7 +15,7 @@ export default function PhoenixLogo({ className = "w-16 h-16", showText = false 
             <stop offset="100%" style={{ stopColor: '#FF4500', stopOpacity: 1 }} />
           </linearGradient>
           <filter id="glow">
-            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -23,92 +23,103 @@ export default function PhoenixLogo({ className = "w-16 h-16", showText = false 
           </filter>
         </defs>
         
-        {/* Phoenix Bird Body - inspired by user's logo */}
+        {/* X-SHAPED WINGS DESIGN - Wings that cross to form an X */}
         
-        {/* Left Wing - Upper */}
+        {/* TOP LEFT WING - Sweeping from top-left down to bottom-right */}
         <path
-          d="M 50 50 Q 25 40 15 35 Q 10 32 8 28 Q 7 25 10 24 Q 15 25 20 30 Q 30 40 40 45 Z"
+          d="M 15 15 Q 20 18 25 22 L 35 32 Q 40 37 45 43 L 48 46 L 42 40 Q 38 35 32 30 L 22 20 Q 18 16 15 15 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.95"
         />
-        
-        {/* Left Wing - Middle */}
         <path
-          d="M 50 50 Q 28 50 18 48 Q 12 47 8 44 Q 6 42 8 40 Q 12 40 18 43 Q 30 48 42 50 Z"
+          d="M 20 12 Q 25 15 30 20 L 40 30 Q 45 36 50 42 L 52 44 L 46 38 Q 42 33 36 28 L 26 18 Q 22 14 20 12 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.9"
         />
-        
-        {/* Left Wing - Lower */}
         <path
-          d="M 50 50 Q 30 58 20 62 Q 14 65 10 66 Q 7 67 8 64 Q 10 60 16 58 Q 28 54 42 52 Z"
+          d="M 25 10 Q 30 13 35 18 L 45 28 Q 50 34 55 40 L 56 42 L 51 36 Q 47 31 41 26 L 31 16 Q 27 12 25 10 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.85"
         />
         
-        {/* Right Wing - Upper */}
+        {/* BOTTOM LEFT WING - Sweeping from bottom-left up to top-right */}
         <path
-          d="M 50 50 Q 75 40 85 35 Q 90 32 92 28 Q 93 25 90 24 Q 85 25 80 30 Q 70 40 60 45 Z"
+          d="M 15 85 Q 20 82 25 78 L 35 68 Q 40 63 45 57 L 48 54 L 42 60 Q 38 65 32 70 L 22 80 Q 18 84 15 85 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.95"
         />
-        
-        {/* Right Wing - Middle */}
         <path
-          d="M 50 50 Q 72 50 82 48 Q 88 47 92 44 Q 94 42 92 40 Q 88 40 82 43 Q 70 48 58 50 Z"
+          d="M 20 88 Q 25 85 30 80 L 40 70 Q 45 64 50 58 L 52 56 L 46 62 Q 42 67 36 72 L 26 82 Q 22 86 20 88 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.9"
         />
-        
-        {/* Right Wing - Lower */}
         <path
-          d="M 50 50 Q 70 58 80 62 Q 86 65 90 66 Q 93 67 92 64 Q 90 60 84 58 Q 72 54 58 52 Z"
+          d="M 25 90 Q 30 87 35 82 L 45 72 Q 50 66 55 60 L 56 58 L 51 64 Q 47 69 41 74 L 31 84 Q 27 88 25 90 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.85"
         />
         
-        {/* Center Body/Head */}
-        <ellipse
+        {/* TOP RIGHT WING - Sweeping from top-right down to bottom-left */}
+        <path
+          d="M 85 15 Q 80 18 75 22 L 65 32 Q 60 37 55 43 L 52 46 L 58 40 Q 62 35 68 30 L 78 20 Q 82 16 85 15 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.95"
+        />
+        <path
+          d="M 80 12 Q 75 15 70 20 L 60 30 Q 55 36 50 42 L 48 44 L 54 38 Q 58 33 64 28 L 74 18 Q 78 14 80 12 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.9"
+        />
+        <path
+          d="M 75 10 Q 70 13 65 18 L 55 28 Q 50 34 45 40 L 44 42 L 49 36 Q 53 31 59 26 L 69 16 Q 73 12 75 10 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.85"
+        />
+        
+        {/* BOTTOM RIGHT WING - Sweeping from bottom-right up to top-left */}
+        <path
+          d="M 85 85 Q 80 82 75 78 L 65 68 Q 60 63 55 57 L 52 54 L 58 60 Q 62 65 68 70 L 78 80 Q 82 84 85 85 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.95"
+        />
+        <path
+          d="M 80 88 Q 75 85 70 80 L 60 70 Q 55 64 50 58 L 48 56 L 54 62 Q 58 67 64 72 L 74 82 Q 78 86 80 88 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.9"
+        />
+        <path
+          d="M 75 90 Q 70 87 65 82 L 55 72 Q 50 66 45 60 L 44 58 L 49 64 Q 53 69 59 74 L 69 84 Q 73 88 75 90 Z"
+          fill="url(#phoenixGradient)"
+          filter="url(#glow)"
+          opacity="0.85"
+        />
+        
+        {/* Center Phoenix Head/Body */}
+        <circle
           cx="50"
           cy="50"
-          rx="8"
-          ry="12"
+          r="10"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
         />
         
-        {/* Head Crown/Crest */}
+        {/* Crown/Flame on top */}
         <path
-          d="M 45 40 Q 48 30 50 28 Q 52 30 55 40 Z"
+          d="M 45 42 Q 48 35 50 32 Q 52 35 55 42 Z"
           fill="url(#phoenixGradient)"
           filter="url(#glow)"
           opacity="0.9"
-        />
-        
-        {/* Tail Feathers */}
-        <path
-          d="M 50 60 Q 48 75 45 85 Q 44 88 45 90 Q 46 88 47 85 Q 49 75 50 65 Z"
-          fill="url(#phoenixGradient)"
-          filter="url(#glow)"
-          opacity="0.8"
-        />
-        <path
-          d="M 50 60 Q 50 78 50 88 Q 50 92 50 92 Q 50 92 50 88 Q 50 78 50 65 Z"
-          fill="url(#phoenixGradient)"
-          filter="url(#glow)"
-          opacity="0.85"
-        />
-        <path
-          d="M 50 60 Q 52 75 55 85 Q 56 88 55 90 Q 54 88 53 85 Q 51 75 50 65 Z"
-          fill="url(#phoenixGradient)"
-          filter="url(#glow)"
-          opacity="0.8"
         />
       </svg>
       
