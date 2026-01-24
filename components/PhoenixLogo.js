@@ -6,10 +6,10 @@ export default function PhoenixLogo({ className = "w-16 h-16", showText = false 
       <svg 
         viewBox="0 0 200 200" 
         role="img" 
-        aria-label="Athenix Wing X logo" 
+        aria-label="Athenix Winged X logo" 
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-full"
-        style={{ filter: 'drop-shadow(0 2px 8px rgba(255,110,0,.25))' }}
+        style={{ filter: 'drop-shadow(0 2px 6px rgba(255,110,0,.3))' }}
       >
         <defs>
           {/* Elegant gradient */}
@@ -19,119 +19,127 @@ export default function PhoenixLogo({ className = "w-16 h-16", showText = false 
             <stop offset="100%" stopColor="#E5391A"/>
           </linearGradient>
           
-          {/* Subtle inner glow */}
-          <radialGradient id="innerGlow" cx="50%" cy="50%">
-            <stop offset="0%" stopColor="#FFE5CC" stopOpacity="0.3"/>
-            <stop offset="100%" stopColor="#FF6B00" stopOpacity="0"/>
-          </radialGradient>
+          {/* Glow effect */}
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
         </defs>
 
-        {/* LEFT WING - Top to bottom diagonal */}
-        <g opacity="0.95">
-          {/* Outer feather */}
+        {/* X CORE - Bold and centered */}
+        <g filter="url(#glow)">
+          {/* Left diagonal of X */}
           <path 
             fill="url(#wingGradient)" 
-            d="M 30 40 Q 35 45 45 55 L 80 90 Q 85 95 90 100 L 95 105 L 85 95 Q 75 85 65 75 L 40 50 Q 32 42 30 40 Z"
+            d="M 60 50 L 100 100 L 60 150 L 50 140 L 82 100 L 50 60 Z"
           />
-          {/* Middle feather */}
+          
+          {/* Right diagonal of X */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.92"
-            d="M 40 50 Q 45 55 55 65 L 85 95 Q 90 100 95 105 L 98 108 L 90 100 Q 82 92 72 82 L 48 58 Q 42 52 40 50 Z"
-          />
-          {/* Inner feather */}
-          <path 
-            fill="url(#wingGradient)" 
-            opacity="0.88"
-            d="M 50 60 Q 55 65 65 75 L 90 100 Q 94 104 98 108 L 100 110 L 94 104 Q 88 98 78 88 L 58 68 Q 52 62 50 60 Z"
+            d="M 140 50 L 150 60 L 118 100 L 150 140 L 140 150 L 100 100 Z"
           />
         </g>
 
-        {/* RIGHT WING - Top to bottom diagonal (mirrored) */}
+        {/* LEFT WING - Flowing from top-left corner of X */}
         <g opacity="0.95">
-          {/* Outer feather */}
+          {/* Wing layer 1 - outermost */}
           <path 
             fill="url(#wingGradient)" 
-            d="M 170 40 Q 165 45 155 55 L 120 90 Q 115 95 110 100 L 105 105 L 115 95 Q 125 85 135 75 L 160 50 Q 168 42 170 40 Z"
+            opacity="0.9"
+            d="M 50 60 Q 40 55 30 52 Q 20 50 15 48 L 12 45 Q 18 47 28 50 Q 38 53 48 58 Z"
           />
-          {/* Middle feather */}
+          {/* Wing layer 2 */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.92"
-            d="M 160 50 Q 155 55 145 65 L 115 95 Q 110 100 105 105 L 102 108 L 110 100 Q 118 92 128 82 L 152 58 Q 158 52 160 50 Z"
+            opacity="0.85"
+            d="M 52 65 Q 42 60 32 57 Q 22 55 17 53 L 15 50 Q 20 52 30 55 Q 40 58 50 63 Z"
           />
-          {/* Inner feather */}
+          {/* Wing layer 3 - innermost */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.88"
-            d="M 150 60 Q 145 65 135 75 L 110 100 Q 106 104 102 108 L 100 110 L 106 104 Q 112 98 122 88 L 142 68 Q 148 62 150 60 Z"
+            opacity="0.8"
+            d="M 54 70 Q 44 65 34 62 Q 24 60 19 58 L 18 55 Q 22 57 32 60 Q 42 63 52 68 Z"
           />
         </g>
 
-        {/* LOWER LEFT WING - Bottom to top diagonal */}
+        {/* RIGHT WING - Flowing from top-right corner of X */}
         <g opacity="0.95">
-          {/* Outer feather */}
+          {/* Wing layer 1 - outermost */}
           <path 
             fill="url(#wingGradient)" 
-            d="M 30 160 Q 35 155 45 145 L 80 110 Q 85 105 90 100 L 95 95 L 85 105 Q 75 115 65 125 L 40 150 Q 32 158 30 160 Z"
+            opacity="0.9"
+            d="M 150 60 Q 160 55 170 52 Q 180 50 185 48 L 188 45 Q 182 47 172 50 Q 162 53 152 58 Z"
           />
-          {/* Middle feather */}
+          {/* Wing layer 2 */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.92"
-            d="M 40 150 Q 45 145 55 135 L 85 105 Q 90 100 95 95 L 98 92 L 90 100 Q 82 108 72 118 L 48 142 Q 42 148 40 150 Z"
+            opacity="0.85"
+            d="M 148 65 Q 158 60 168 57 Q 178 55 183 53 L 185 50 Q 180 52 170 55 Q 160 58 150 63 Z"
           />
-          {/* Inner feather */}
+          {/* Wing layer 3 - innermost */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.88"
-            d="M 50 140 Q 55 135 65 125 L 90 100 Q 94 96 98 92 L 100 90 L 94 96 Q 88 102 78 112 L 58 132 Q 52 138 50 140 Z"
+            opacity="0.8"
+            d="M 146 70 Q 156 65 166 62 Q 176 60 181 58 L 182 55 Q 178 57 168 60 Q 158 63 148 68 Z"
           />
         </g>
 
-        {/* LOWER RIGHT WING - Bottom to top diagonal (mirrored) */}
+        {/* BOTTOM LEFT WING - Flowing from bottom-left corner of X */}
         <g opacity="0.95">
-          {/* Outer feather */}
+          {/* Wing layer 1 */}
           <path 
             fill="url(#wingGradient)" 
-            d="M 170 160 Q 165 155 155 145 L 120 110 Q 115 105 110 100 L 105 95 L 115 105 Q 125 115 135 125 L 160 150 Q 168 158 170 160 Z"
+            opacity="0.9"
+            d="M 50 140 Q 40 145 30 148 Q 20 150 15 152 L 12 155 Q 18 153 28 150 Q 38 147 48 142 Z"
           />
-          {/* Middle feather */}
+          {/* Wing layer 2 */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.92"
-            d="M 160 150 Q 155 145 145 135 L 115 105 Q 110 100 105 95 L 102 92 L 110 100 Q 118 108 128 118 L 152 142 Q 158 148 160 150 Z"
+            opacity="0.85"
+            d="M 52 135 Q 42 140 32 143 Q 22 145 17 147 L 15 150 Q 20 148 30 145 Q 40 142 50 137 Z"
           />
-          {/* Inner feather */}
+          {/* Wing layer 3 */}
           <path 
             fill="url(#wingGradient)" 
-            opacity="0.88"
-            d="M 150 140 Q 145 135 135 125 L 110 100 Q 106 96 102 92 L 100 90 L 106 96 Q 112 102 122 112 L 142 132 Q 148 138 150 140 Z"
+            opacity="0.8"
+            d="M 54 130 Q 44 135 34 138 Q 24 140 19 142 L 18 145 Q 22 143 32 140 Q 42 137 52 132 Z"
           />
         </g>
 
-        {/* Center core - subtle */}
-        <circle 
-          cx="100" 
-          cy="100" 
-          r="12" 
-          fill="url(#wingGradient)"
-          opacity="0.85"
-        />
-        
-        {/* Center highlight */}
+        {/* BOTTOM RIGHT WING - Flowing from bottom-right corner of X */}
+        <g opacity="0.95">
+          {/* Wing layer 1 */}
+          <path 
+            fill="url(#wingGradient)" 
+            opacity="0.9"
+            d="M 150 140 Q 160 145 170 148 Q 180 150 185 152 L 188 155 Q 182 153 172 150 Q 162 147 152 142 Z"
+          />
+          {/* Wing layer 2 */}
+          <path 
+            fill="url(#wingGradient)" 
+            opacity="0.85"
+            d="M 148 135 Q 158 140 168 143 Q 178 145 183 147 L 185 150 Q 180 148 170 145 Q 160 142 150 137 Z"
+          />
+          {/* Wing layer 3 */}
+          <path 
+            fill="url(#wingGradient)" 
+            opacity="0.8"
+            d="M 146 130 Q 156 135 166 138 Q 176 140 181 142 L 182 145 Q 178 143 168 140 Q 158 137 148 132 Z"
+          />
+        </g>
+
+        {/* Center glow accent */}
         <circle 
           cx="100" 
           cy="100" 
           r="8" 
-          fill="url(#innerGlow)"
-        />
-
-        {/* Small crown accent on top */}
-        <path 
-          fill="url(#wingGradient)" 
-          opacity="0.9"
-          d="M 95 85 Q 98 78 100 75 Q 102 78 105 85 Z"
+          fill="url(#wingGradient)"
+          opacity="0.6"
+          filter="url(#glow)"
         />
       </svg>
       
