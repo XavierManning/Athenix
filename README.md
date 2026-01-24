@@ -2,14 +2,14 @@
 
 **Tagline:** "Rebuild. Refine. Rise."
 
-Athenix is a comprehensive AI-powered fitness and nutrition transformation app that provides personalized 12-week workout programs and meal plans based on your unique profile, goals, and lifestyle.
+Athenix is a comprehensive AI-powered fitness and nutrition transformation app that provides personalized 12-week workout programs, meal plans, and real-time form analysis based on your unique profile, goals, and lifestyle.
 
 ## 🚀 Features
 
 ### Phase 1 MVP (Current Build)
 
 ✅ **Landing Page**
-- Modern hero section with animated Athenix phoenix logo
+- Modern hero section with elegant X-wing phoenix logo
 - Feature highlights and how-it-works section
 - Responsive design optimized for all devices
 
@@ -31,8 +31,8 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 
 ✅ **AI Plan Generation**
 - Animated loading screen with progress tracking
-- Mock AI-powered workout and nutrition plan generation
-- Personalized based on ALL user inputs
+- Personalized workout and nutrition plan generation
+- Based on ALL user inputs
 - 12-week phased program (Foundation → Progressive Overload → Peak Performance)
 
 ✅ **Dashboard**
@@ -47,9 +47,24 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 - Phase-based program (3 phases, 12 weeks)
 - Detailed daily workouts for Phase 1
 - Exercise library with sets/reps/rest periods
+- **🎥 Exercise demonstration video links** - Each exercise has a "Watch Demo Video" button
 - Form notes and weight tracking
 - Workout completion tracking
 - Phase unlocking system (Phase 2 unlocks Week 5, Phase 3 unlocks Week 9)
+
+✅ **AI Form Check** (NEW! 🔥)
+- **Upload workout videos** and get instant AI feedback
+- Analyze your form for any exercise (Squat, Bench Press, Deadlift, etc.)
+- **AI-powered analysis** provides:
+  - Overall form score (1-10)
+  - Strengths in your technique
+  - Areas for improvement
+  - Critical safety issues (if any)
+  - Personalized recommendations
+- Video upload with drag-and-drop
+- History of previous analyses
+- Mobile-friendly video capture
+- **Real-time feedback** in seconds
 
 ✅ **Nutrition Plan**
 - Daily calorie and macro targets
@@ -82,6 +97,11 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 
 ## 🎨 Design System
 
+### Brand Identity
+- **Logo:** Elegant X-wing phoenix design - timeless and clean
+- Wings forming an X shape symbolizing transformation
+- Orange gradient (gold to fire red)
+
 ### Brand Colors
 - **Primary (Phoenix Orange):** `#FF6B00`
 - **Secondary (Light Orange/Gold):** `#FFB347`
@@ -95,11 +115,6 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 - **Font Family:** Poppins (Google Fonts)
 - **Weights:** 300, 400, 500, 600, 700
 
-### Logo
-- Custom SVG phoenix wings with crossed "X" design
-- Gradient from orange to red
-- Glowing drop shadow effect
-
 ---
 
 ## 📦 Tech Stack
@@ -110,6 +125,7 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 - **Authentication:** Mock (ready for Supabase)
 - **Database:** Mock (ready for Supabase PostgreSQL)
 - **AI Generation:** Mock (ready for OpenAI GPT-4)
+- **AI Form Check:** Mock (ready for OpenAI GPT-4 Vision API)
 - **Deployment:** Vercel
 
 ---
@@ -122,20 +138,14 @@ Athenix is a comprehensive AI-powered fitness and nutrition transformation app t
 
 ### Installation
 
-1. **Clone the repository** (if applicable)
-```bash
-git clone <your-repo-url>
-cd athenix
-```
-
-2. **Install dependencies**
+1. **Install dependencies**
 ```bash
 yarn install
 # or
 npm install
 ```
 
-3. **Set up environment variables**
+2. **Set up environment variables**
 
 The app comes with a `.env.local` file containing placeholder values. For development, the app works with mock data (set `NEXT_PUBLIC_DEV_MODE=true`).
 
@@ -147,7 +157,7 @@ NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-# OpenAI Configuration
+# OpenAI Configuration (for workout/nutrition + form analysis)
 OPENAI_API_KEY=sk-proj-your-real-key
 
 # App Configuration
@@ -157,21 +167,61 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 NEXT_PUBLIC_DEV_MODE=false
 ```
 
-4. **Run the development server**
+3. **Run the development server**
 ```bash
 yarn dev
 # or
 npm run dev
 ```
 
-5. **Open your browser**
+4. **Open your browser**
 Navigate to [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## 🔑 Getting Required API Keys
 
-### Supabase Setup
+### OpenAI API Key (Required for AI Features)
+
+1. Go to [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
+2. Sign up or log in
+3. Click "Create new secret key"
+4. Name your key (e.g., "Athenix App")
+5. Copy the key → `OPENAI_API_KEY`
+6. **Note:** You need GPT-4 Vision API access for Form Check feature
+
+**API Usage:**
+- **Workout/Nutrition Generation:** ~$0.10-0.30 per user (one-time)
+- **Form Check Video Analysis:** ~$0.05-0.15 per video
+
+**Implementing Real AI Form Check:**
+
+```javascript
+// Example OpenAI Vision API integration for form analysis
+const response = await openai.chat.completions.create({
+  model: "gpt-4-vision-preview",
+  messages: [
+    {
+      role: "user",
+      content: [
+        {
+          type: "text",
+          text: `Analyze this ${exercise} form. Provide: 1) Overall score (1-10), 2) Strengths, 3) Areas to improve, 4) Safety concerns, 5) Recommendations`
+        },
+        {
+          type: "image_url",
+          image_url: {
+            url: videoFrameUrl // Extract key frames from video
+          }
+        }
+      ]
+    }
+  ],
+  max_tokens: 500
+})
+```
+
+### Supabase Setup (Optional - for production)
 
 1. Go to [https://supabase.com](https://supabase.com)
 2. Sign up or log in
@@ -183,63 +233,6 @@ Navigate to [http://localhost:3000](http://localhost:3000)
    - **anon/public key** → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
    - **service_role key** → `SUPABASE_SERVICE_ROLE_KEY`
 
-**Database Tables to Create:**
-```sql
--- Users table (handled by Supabase Auth)
-
--- User Profiles
-CREATE TABLE user_profiles (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID REFERENCES auth.users(id),
-  name TEXT,
-  age INTEGER,
-  gender TEXT,
-  height TEXT,
-  weight DECIMAL,
-  primary_goal TEXT,
-  -- ... add all other fields from onboarding
-  created_at TIMESTAMP DEFAULT NOW()
-);
-
--- Workout Programs
-CREATE TABLE workout_programs (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID REFERENCES auth.users(id),
-  generated_at TIMESTAMP DEFAULT NOW(),
-  current_phase INTEGER,
-  current_week INTEGER,
-  phases JSONB
-);
-
--- Progress Tracking
-CREATE TABLE progress_check_ins (
-  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  user_id UUID REFERENCES auth.users(id),
-  week_number INTEGER,
-  date TIMESTAMP DEFAULT NOW(),
-  weight DECIMAL,
-  photos TEXT[],
-  measurements JSONB,
-  energy_level INTEGER,
-  sleep_quality INTEGER,
-  stress_level INTEGER,
-  notes TEXT
-);
-```
-
-### OpenAI API Key
-
-1. Go to [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys)
-2. Sign up or log in
-3. Click "Create new secret key"
-4. Name your key (e.g., "Athenix App")
-5. Copy the key → `OPENAI_API_KEY`
-6. **Note:** You need GPT-4 API access for best results
-
-**Cost Estimate:**
-- Generating one complete workout + nutrition plan: ~$0.10-0.30 per user
-- Using GPT-4-turbo is more cost-effective than GPT-4
-
 ---
 
 ## 📱 App Flow
@@ -250,17 +243,43 @@ CREATE TABLE progress_check_ins (
 3. Complete 9-step onboarding assessment (~5-10 minutes)
 4. Watch AI generate personalized plan (8-second animation)
 5. Arrive at dashboard
-6. View today's workout and nutrition plan
-7. Start tracking progress
+6. View today's workout with demo video links
+7. **Upload form check video** to get AI feedback
+8. Start tracking progress
 
-### Returning User Journey
-1. Log in
-2. Dashboard shows current week and phase
-3. View today's workout
-4. Log meals and water intake
-5. Complete workouts and mark exercises
-6. Submit weekly check-ins
-7. Track progress with photos and measurements
+### Form Check Feature
+1. Navigate to "AI Form Check" from dashboard
+2. Select exercise type (Squat, Bench Press, etc.)
+3. Upload workout video (MP4, MOV, AVI)
+4. AI analyzes form in 3 seconds
+5. Receive detailed feedback:
+   - Form score (e.g., 8.5/10)
+   - What you're doing right
+   - What needs improvement
+   - Safety warnings
+   - Actionable recommendations
+6. View analysis history
+7. Re-upload to track improvement
+
+---
+
+## 🎥 Exercise Demonstration Videos
+
+Each workout exercise now includes:
+- **"Watch Demo Video" button** that opens YouTube search for that specific exercise
+- Proper form tutorials
+- Multiple camera angles
+- Expert instruction
+- Common mistakes to avoid
+
+Example exercises with video links:
+- Barbell Squat
+- Bench Press
+- Deadlift
+- Overhead Press
+- Romanian Deadlift
+- Bent-Over Row
+- And many more...
 
 ---
 
@@ -269,26 +288,27 @@ CREATE TABLE progress_check_ins (
 ### File Structure
 ```
 /app
-├── /app                    # Next.js app directory
-│   ├── page.js            # Landing page
-│   ├── layout.js          # Root layout
-│   ├── globals.css        # Global styles
-│   ├── /login             # Login page
-│   ├── /signup            # Signup page
-│   ├── /onboarding        # 9-step assessment
-│   ├── /generate-plan     # AI generation loading
-│   └── /dashboard         # User dashboard
-│       ├── page.js        # Main dashboard
-│       ├── /workouts      # Workout plan view
-│       ├── /nutrition     # Nutrition plan view
-│       ├── /progress      # Progress tracking
-│       ├── /plan          # Full plan overview
-│       └── /settings      # Settings page
+├── /app                           # Next.js app directory
+│   ├── page.js                   # Landing page
+│   ├── layout.js                 # Root layout
+│   ├── globals.css               # Global styles
+│   ├── /login                    # Login page
+│   ├── /signup                   # Signup page
+│   ├── /onboarding               # 9-step assessment
+│   ├── /generate-plan            # AI generation loading
+│   └── /dashboard                # User dashboard
+│       ├── page.js               # Main dashboard
+│       ├── /workouts             # Workout plan view
+│       ├── /nutrition            # Nutrition plan view
+│       ├── /progress             # Progress tracking
+│       ├── /plan                 # Full plan overview
+│       ├── /form-check           # 🆕 AI Form Check
+│       └── /settings             # Settings page
 ├── /components
-│   └── PhoenixLogo.js     # Athenix logo component
-├── .env.local             # Environment variables
-├── tailwind.config.js     # Tailwind configuration
-└── package.json           # Dependencies
+│   └── PhoenixLogo.js            # X-wing phoenix logo
+├── .env.local                    # Environment variables
+├── tailwind.config.js            # Tailwind configuration
+└── package.json                  # Dependencies
 ```
 
 ### Mock Data System
@@ -296,52 +316,12 @@ CREATE TABLE progress_check_ins (
 The app currently uses LocalStorage for data persistence:
 - `athenix_user` - User account info
 - `athenix_onboarding_data` - Assessment responses
-- `athenix_onboarding_complete` - Completion flag
 - `athenix_workout_plan` - Generated workout program
 - `athenix_nutrition_plan` - Generated meal plan
 - `athenix_progress` - Weight, photos, check-ins
-- `athenix_current_week` - Current program week
-- `athenix_current_phase` - Current program phase
+- `athenix_form_check_history` - 🆕 Form analysis history
 - `athenix_completed_workouts` - Workout completion tracking
 - `athenix_water_today` - Daily water intake
-- `athenix_logged_meals_today` - Daily meal logging
-
-### AI Integration (Ready to Implement)
-
-The file `/app/app/generate-plan/page.js` contains mock AI generation functions. To integrate real OpenAI:
-
-```javascript
-// Example OpenAI integration
-const response = await fetch('/api/generate-plan', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ userData: onboardingData })
-})
-
-const { workoutPlan, nutritionPlan } = await response.json()
-```
-
-Backend API route would call OpenAI:
-```javascript
-import OpenAI from 'openai'
-
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
-
-const completion = await openai.chat.completions.create({
-  model: "gpt-4-turbo",
-  messages: [
-    {
-      role: "system",
-      content: "You are Athenix, an advanced AI fitness coach..."
-    },
-    {
-      role: "user",
-      content: `Create a 12-week workout program for: ${JSON.stringify(userData)}`
-    }
-  ],
-  response_format: { type: "json_object" }
-})
-```
 
 ---
 
@@ -353,82 +333,8 @@ const completion = await openai.chat.completions.create({
 2. Go to [https://vercel.com](https://vercel.com)
 3. Click "New Project"
 4. Import your repository
-5. Add environment variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-   - `OPENAI_API_KEY`
-   - `NEXT_PUBLIC_APP_URL` (your production URL)
+5. Add environment variables
 6. Click "Deploy"
-
-Vercel will automatically:
-- Build your Next.js app
-- Deploy to global CDN
-- Provide HTTPS
-- Enable automatic deployments on git push
-
-### Custom Domain
-1. In Vercel dashboard, go to "Settings → Domains"
-2. Add your domain (e.g., athenix.team)
-3. Follow DNS configuration instructions
-4. Wait for SSL certificate provisioning (~24 hours)
-
----
-
-## 🧪 Testing
-
-### Manual Testing Checklist
-
-**Landing Page**
-- [ ] Logo displays correctly
-- [ ] Animations work smoothly
-- [ ] CTA buttons navigate to signup
-- [ ] Responsive on mobile/tablet/desktop
-
-**Authentication**
-- [ ] Signup creates user account
-- [ ] Login redirects to dashboard (if onboarding complete)
-- [ ] Login redirects to onboarding (if incomplete)
-- [ ] Validation messages display correctly
-
-**Onboarding**
-- [ ] All 9 steps load without errors
-- [ ] Progress bar updates correctly
-- [ ] Form validation works
-- [ ] Data persists between steps
-- [ ] Photo upload works
-- [ ] Generate plan button triggers loading screen
-
-**AI Generation**
-- [ ] Loading animation displays
-- [ ] Progress messages rotate
-- [ ] Redirects to dashboard after completion
-- [ ] Plans are generated and stored
-
-**Dashboard**
-- [ ] Stats display correctly
-- [ ] Today's workout shows
-- [ ] Nutrition macros display
-- [ ] Water tracker works
-- [ ] Navigation works
-
-**Workout Plan**
-- [ ] Phase selector works
-- [ ] Week selector works
-- [ ] Phase 2 and 3 are locked initially
-- [ ] Workout detail view displays exercises
-- [ ] Exercise completion tracking works
-
-**Nutrition Plan**
-- [ ] Macro progress bars work
-- [ ] Meal logging works
-- [ ] Water intake tracker works
-- [ ] Guidelines display
-
-**Progress Tracking**
-- [ ] Photo upload works
-- [ ] Check-in form submits
-- [ ] Stats update correctly
 
 ---
 
@@ -437,59 +343,34 @@ Vercel will automatically:
 ### Current Limitations (MVP)
 - Authentication uses mock data (needs Supabase integration)
 - AI generation uses mock data (needs OpenAI integration)
+- **Form Check uses mock analysis** (needs OpenAI Vision API)
 - Social login buttons are placeholders
 - PDF download is placeholder
-- Chat with coach is disabled (coming soon)
-- No email notifications yet
-- No payment/subscription system yet
 
 ### Phase 2 Features (Planned)
 - Real Supabase authentication and database
-- Real OpenAI GPT-4 integration
-- Exercise video library
+- Real OpenAI GPT-4 integration for plans
+- **Real OpenAI Vision API for form analysis**
+- Exercise video library (embedded demos)
 - Rest timer with sound alerts
 - Social sharing of progress
 - Achievement badges system
-- Community feed
 - Email notifications
-- Referral system
 
 ### Phase 3 Features (Future)
-- Chat with real trainers
-- Stripe subscription system
-- Wearable device integration (Fitbit, Apple Watch)
-- Meal prep shopping list
-- Recipe suggestions
-- Workout music integration (Spotify)
+- Live video form analysis (real-time feedback)
+- 3D skeletal tracking overlay
+- Motion capture integration
+- AR form guidance
+- Wearable device integration
 - Advanced analytics dashboard
-
----
-
-## 💻 Development Commands
-
-```bash
-# Install dependencies
-yarn install
-
-# Run development server
-yarn dev
-
-# Build for production
-yarn build
-
-# Start production server
-yarn start
-
-# Run linter
-yarn lint
-```
 
 ---
 
 ## 📞 Support
 
 For issues or questions:
-- Email: support@athenix.team (placeholder)
+- Email: support@athenix.team
 - GitHub Issues: [Create an issue](your-repo-url)
 
 ---
@@ -497,16 +378,6 @@ For issues or questions:
 ## 📄 License
 
 Copyright © 2025 Athenix. All rights reserved.
-
----
-
-## 🙏 Credits
-
-- **Design:** Custom Athenix brand identity
-- **Fonts:** Poppins by Google Fonts
-- **Icons:** Lucide React
-- **Framework:** Next.js by Vercel
-- **AI:** OpenAI GPT-4 (when integrated)
 
 ---
 
