@@ -358,14 +358,17 @@ export default function DashboardPage() {
             <p className="text-sm text-text-secondary">View full 12-week program overview</p>
           </button>
 
-          <div className="card opacity-50 cursor-not-allowed">
+          <button 
+            onClick={() => router.push('/dashboard/form-check')}
+            className="card hover:border-primary/50 transition-all hover:scale-105 text-left"
+          >
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">💬</span>
-              <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded">Coming Soon</span>
+              <span className="text-2xl">🎥</span>
+              <span className="text-xs bg-primary/20 text-primary px-2 py-1 rounded font-semibold">AI Powered</span>
             </div>
-            <h3 className="text-lg font-bold mb-2">Chat with Coach</h3>
-            <p className="text-sm text-text-secondary">Get personalized advice and support</p>
-          </div>
+            <h3 className="text-lg font-bold mb-2">AI Form Check</h3>
+            <p className="text-sm text-text-secondary">Upload videos and get instant feedback on your form</p>
+          </button>
         </div>
       </main>
 
